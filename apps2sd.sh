@@ -131,7 +131,7 @@ help=
 sdkLocation=
 mode="external"
 
-while [[ $# > 1 ]]; do
+while [[ $# > 0 ]]; do
   key="$1"
   shift
 
@@ -153,12 +153,13 @@ while [[ $# > 1 ]]; do
       mode="$1"
       if [ $mode != "auto" -a $mode != "external" -a $mode != "internal" ]
       then
-        echo "There is no such mode available! Please try again with different args..."
+        echo "There is no such mode available! Please try again with different arguments..."
+        printf "\nAvailable modes:\n* auto\n* internal\n* external"
         exit 1
       fi
       ;;
    *)
-      echo >&2 "Invalid argument: $1"
+      printf >&2 $"Usage: $0 {-s|-m}\n\nUse $0 --help for help on the arguments"
       exit 1
       ;;
   esac
