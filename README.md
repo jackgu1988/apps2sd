@@ -63,3 +63,17 @@ Mode, or where the apps on your phone will be installed by default.
 * external: external storage
 
 Usage example: <code>./apps2sd -m external</code>
+
+## Examples ##
+
+<code>./apps2sd</code>
+Sets the app install location to external storage (default script behaviour).
+
+<code>./apps2sd -s /opt/android-sdk/</code>
+Sets the app install location to external storage (default script behaviour). <code>-s</code> argument in case the SDK's/adb directory is not set as an environment variable.
+
+<code>./apps2sd -m auto -s /opt/android-sdk/</code>
+Sets the app install location to auto (default for most devices).
+
+<code>./apps2sd --help</code>
+Script help (although this guide provides much more details).

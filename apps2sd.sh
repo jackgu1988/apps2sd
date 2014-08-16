@@ -4,8 +4,6 @@ function check_adb
 {
   # Checks if adb can be found
 
-  echo "(Please read the script's help if you are not sure what you are doing: apps2sd --help)"
-
   path_to_adb=$(which adb)
 
   if [ ! -f $sdkLocation/platform-tools/adb -a ! -f $sdkLocation/adb -a ! -x $path_to_adb ]
@@ -137,13 +135,22 @@ while [[ $# > 0 ]]; do
 
   case $key in
    -h|--help)
-      echo "This script will make your phone capable of moving apps (that were not movable) to the SD card."
-      echo "WARNING: apps moved to the external SD card might not sync or work as expected"
+      echo "$(tput setaf 2)apps2sd"
+      echo "=======$(tput sgr0)"
+      echo ""
+      echo "This script will make your Android device capable of moving apps (that were not movable) to the external SD card."
+      echo "$(tput setaf 1)WARNING:$(tput sgr0) apps moved to the external SD card might not sync or work as expected. Use at your own risk."
       echo "Please read this article if you do not know what apps to move https://developer.android.com/guide/topics/data/install-location.html"
       echo ""
-      echo "Use -s <location> in order to set the SDK location."
-      echo "Use -m <mode> in order to select the default install location. (Available locations: auto, internal, external)"
-      echo "Default install location on most phones: auto"
+      echo "Please also refer to the README (https://github.com/jackgu1988/apps2sd) in order to check the best practises, examples and other info."
+      echo ""
+      echo "* Use -s <location> in order to set the SDK's absolute path. (Use only if adb is not set as an environment variable)"
+      echo "* Use -m <mode> in order to select the default install location. (Available locations: auto, internal, external)"
+      echo ""
+      echo "- Default install location on most phones: auto"
+      echo "- Default script behaviour without the -m argument: external"
+      echo ""
+      echo "License: GPLv3"
       exit 0
       ;;
    -s|--sdk)
