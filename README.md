@@ -39,14 +39,13 @@ If you run the script without any arguments, the default install location will c
 
 ## Execution instructions ##
 
-0. Make sure you have installed ~~the Android SDK and~~ adb (if not follow this link: https://developer.android.com/sdk/index.html).
+1. Make sure you have installed ~~the Android SDK and~~ adb (if not follow this link: https://developer.android.com/sdk/index.html).
 Also make sure that your OS contains the <code>udev</code> rules required (else follow this: https://github.com/M0Rf30/android-udev-rules).
-
-1. Download the script from the git repo
-2. cd to the directory (ex <code>cd _some_directory_</code>)
-3. Make it executable by running <code>chmod +x apps2sd</code>
-4. Enable USB debugging on your device (instructions: https://developer.android.com/tools/device.html) and then connect it to your computer
-5. Run <code>./apps2sd.sh</code> and follow the instructions
+2. Download the script from the git repo
+3. cd to the directory (ex <code>cd _some_directory_</code>)
+4. Make it executable by running <code>chmod +x apps2sd</code>
+5. Enable USB debugging on your device (instructions: https://developer.android.com/tools/device.html) and then connect it to your computer
+6. Run <code>./apps2sd.sh</code> and follow the instructions
 
 ## Arguments ##
 
