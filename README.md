@@ -42,17 +42,17 @@ If you run the script without any arguments, the default install location will c
 1. Download the script from the git repo
 2. cd to the directory (ex <code>cd _some_directory_</code>)
 3. Make it executable by running <code>chmod +x apps2sd</code>
-4. Run <code>./apps2sd</code> and follow the instructions
+4. Run <code>./apps2sd.sh</code> and follow the instructions
 
 ## Arguments ##
 
 ### -h ###
 
-script help
+Script help
 
 ### -s ###
 
-Android SDK location (or adb location). Ex: <code>./apps2sd -s /opt/android-sdk/</code>
+Android SDK location (or adb location). Ex: <code>./apps2sd.sh -s /opt/android-sdk/</code>
 
 ### -m ###
 
@@ -62,18 +62,27 @@ Mode, or where the apps on your phone will be installed by default.
 * internal: internal storage
 * external: external storage
 
-Usage example: <code>./apps2sd -m external</code>
+Usage example: <code>./apps2sd.sh -m external</code>
+
+### -c ###
+
+Prints the currently used mode and exits.
+
+Usage example: <code>./apps2sd.sh -c</code>
 
 ## Examples ##
 
-<code>./apps2sd</code>
+<code>./apps2sd.sh</code>
 Sets the app install location to external storage (default script behaviour).
 
-<code>./apps2sd -s /opt/android-sdk/</code>
+<code>./apps2sd.sh -s /opt/android-sdk/</code>
 Sets the app install location to external storage (default script behaviour). <code>-s</code> argument in case the SDK's/adb directory is not set as an environment variable.
 
-<code>./apps2sd -m auto -s /opt/android-sdk/</code>
+<code>./apps2sd.sh -m auto -s /opt/android-sdk/</code>
 Sets the app install location to auto (default for most devices).
 
-<code>./apps2sd --help</code>
+<code>./apps2sd.sh -c -s /opt/android-sdk/</code>
+Prints the current mode. In this occasion the SDK is located at /opt/android-sdk/.
+
+<code>./apps2sd.sh --help</code>
 Script help (although this guide provides much more details).

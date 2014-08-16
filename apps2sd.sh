@@ -71,15 +71,21 @@ function check_status ()
     output=$($2 shell pm getInstallLocation)
   fi
 
+  current_mode="$(echo $output | head -c 1)"
+  current_mode_txt=$(echo $output |cut -d "[" -f2 | cut -d "]" -f1)
+
+  if test $print_n_exit -eq 1
+  then
+    echo "Your device's current mode is: $(tput setaf 2)$current_mode_txt"
+    exit 0
+  fi
+
   if [[ $output == *\[$mode\]* ]]
   then
     echo "The hack has already been applied!"
     echo "Bye!"
     exit 0
   else
-    current_mode="$(echo $output | head -c 1)"
-    current_mode_txt=$(echo $output |cut -d "[" -f2 | cut -d "]" -f1)
-
     printf "\n\nCurrent mode: $current_mode_txt\n\n"
 
     echo "Applying the hack... DO NOT DISCONNECT YOUR PHONE OR TURN OFF YOUR COMPUTER!"
@@ -123,6 +129,14 @@ function apply_hack ()
   return 1
 }
 
+function usage_msg
+{
+  # Message to be printed in case of wrong usage of arguments
+
+  printf >&2 $"Usage: $0 {-s|-m|-c}\n\nUse $0 --help for help on the arguments"
+  exit 1
+}
+
 ##### Main
 
 help=
@@ -135,6 +149,11 @@ while [[ $# > 0 ]]; do
 
   case $key in
    -h|--help)
+      if test $# -ne 0
+      then
+        usage_msg
+      fi
+
       echo "$(tput setaf 2)apps2sd"
       echo "=======$(tput sgr0)"
       echo ""
@@ -146,6 +165,7 @@ while [[ $# > 0 ]]; do
       echo ""
       echo "* Use -s <location> in order to set the SDK's absolute path. (Use only if adb is not set as an environment variable)"
       echo "* Use -m <mode> in order to select the default install location. (Available locations: auto, internal, external)"
+      echo "* Use -c in order to just print the currently activated mode."
       echo ""
       echo "- Default install location on most phones: auto"
       echo "- Default script behaviour without the -m argument: external"
@@ -154,9 +174,19 @@ while [[ $# > 0 ]]; do
       exit 0
       ;;
    -s|--sdk)
+      if [ -z "$1" ] || [ $(echo $1 | head -c 1) == "-" ]
+      then
+        usage_msg
+      fi
+
       sdkLocation="$1"
       ;;
    -m|--mode)
+      if [ -z "$1" ] || [ $(echo $1 | head -c 1) == "-" ]
+      then
+        usage_msg
+      fi
+
       mode="$1"
       if [ $mode != "auto" -a $mode != "external" -a $mode != "internal" ]
       then
@@ -165,9 +195,12 @@ while [[ $# > 0 ]]; do
         exit 1
       fi
       ;;
+   -c|--current)
+      shift
+      print_n_exit=1
+      ;;
    *)
-      printf >&2 $"Usage: $0 {-s|-m}\n\nUse $0 --help for help on the arguments"
-      exit 1
+      usage_msg
       ;;
   esac
   shift
